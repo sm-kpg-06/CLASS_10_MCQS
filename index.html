@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class 10 MCQ Mastery - Board Exam Practice Portal</title>
+  <meta name="description" content="Comprehensive Class 10 MCQ Practice Portal for Mathematics and other subjects with chapter-wise quizzes, real-time explanation, and calendar activity tracking.">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+  <!-- Application Container -->
+  <div id="app" class="app-wrapper">
+    
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="nav-brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Class 10 MCQ</span>
+          <span class="brand-subtitle">Mastery Portal</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu" id="mainNav">
+        <button class="nav-tab active" data-page="dashboard" id="tabDashboard">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-tab" data-page="quizzes" id="tabQuizzes">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Quizzes</span>
+        </button>
+        <button class="nav-tab" data-page="records" id="tabRecords">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>Records</span>
+        </button>
+        <button class="nav-tab" data-page="profile" id="tabProfile">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button class="btn-icon theme-toggle-btn" id="themeToggleBtn" title="Toggle Light/Dark Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <!-- User Profile Dropdown Pill -->
+        <div class="user-pill" id="userNavPill">
+          <div class="user-avatar" id="navUserAvatar">K</div>
+          <span class="user-name-text" id="navUserName">Student</span>
+          <button class="btn-logout-small" id="navLogoutBtn" title="Sign Out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="content-container">
+
+      <!-- ============================================== -->
+      <!-- 1. DASHBOARD PAGE -->
+      <!-- ============================================== -->
+      <section id="pageDashboard" class="page-view active">
+        <!-- Welcome Hero -->
+        <div class="hero-banner">
+          <div class="hero-content">
+            <span class="hero-badge"><i class="fa-solid fa-bullseye"></i> Board Exam Prep 2026</span>
+            <h1 class="hero-greeting" id="heroGreeting">Welcome back, <span id="dashUserName">Student</span>! 👋</h1>
+            <p class="hero-date" id="dashCurrentDate">Monday, November 9, 2026</p>
+            <p class="hero-subtitle">Track your daily progress, practice mathematics chapters, and strengthen your concepts with step-by-step solutions.</p>
+            <div class="hero-actions">
+              <button class="btn-primary" id="btnDashStartQuiz">
+                <i class="fa-solid fa-play"></i> Start Today's Quiz
+              </button>
+              <button class="btn-secondary" id="btnDashViewHistory">
+                <i class="fa-solid fa-calendar-check"></i> View Calendar Records
+              </button>
+            </div>
+          </div>
+          <div class="hero-illustration">
+            <div class="floating-stat-card">
+              <i class="fa-solid fa-trophy trophy-icon"></i>
+              <div class="stat-info">
+                <span class="stat-label">Subject Active</span>
+                <span class="stat-value">Mathematics</span>
+                <span class="stat-sub">8 Chapters • 125 MCQs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Stats Row -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-wrap icon-indigo">
+              <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+            <div class="stat-details">
+              <span class="stat-number" id="dashTodayQuizzesCount">0</span>
+              <span class="stat-title">Quizzes Taken Today</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrap icon-emerald">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <div class="stat-details">
+              <span class="stat-number" id="dashTodayAccuracy">0%</span>
+              <span class="stat-title">Today's Accuracy</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrap icon-amber">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div class="stat-details">
+              <span class="stat-number" id="dashTodayQuestionsSolved">0</span>
+              <span class="stat-title">Questions Practiced Today</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrap icon-rose">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+            <div class="stat-details">
+              <span class="stat-number" id="dashTotalPracticedAllTime">0</span>
+              <span class="stat-title">Total Lifetime Quizzes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Practice Log Section -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <h2>Quizzes Practiced Today</h2>
+              <span class="badge-count" id="dashTodayBadgeCount">0 Completed</span>
+            </div>
+            <button class="btn-link" id="btnDashViewAllRecords">
+              View All in Records <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <div id="dashTodayQuizList" class="today-quiz-list">
+            <!-- Dynamically populated or empty state -->
+          </div>
+        </div>
+
+        <!-- Subject Overview Card -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <i class="fa-solid fa-book"></i>
+              <h2>Available Subjects</h2>
+            </div>
+          </div>
+          <div class="subjects-quick-grid">
+            <div class="subject-mini-card active" data-subject="Mathematics">
+              <div class="sub-badge ready"><i class="fa-solid fa-check"></i> Ready to Practice</div>
+              <div class="sub-icon"><i class="fa-solid fa-calculator"></i></div>
+              <h3>Mathematics</h3>
+              <p>8 Chapters • 125 Solved Questions with Explanations</p>
+              <button class="btn-mini-practice" onclick="navigateToQuizzesWithSubject('Mathematics')">Practice Now</button>
+            </div>
+            <div class="subject-mini-card coming-soon" data-subject="Science">
+              <div class="sub-badge soon">Coming Soon</div>
+              <div class="sub-icon"><i class="fa-solid fa-atom"></i></div>
+              <h3>Science</h3>
+              <p>Physics, Chemistry, and Biology objective question bank</p>
+              <button class="btn-mini-practice disabled" disabled>Coming Soon</button>
+            </div>
+            <div class="subject-mini-card coming-soon" data-subject="Social">
+              <div class="sub-badge soon">Coming Soon</div>
+              <div class="sub-icon"><i class="fa-solid fa-earth-americas"></i></div>
+              <h3>Social Science</h3>
+              <p>History, Geography, Civics, and Economics MCQs</p>
+              <button class="btn-mini-practice disabled" disabled>Coming Soon</button>
+            </div>
+            <div class="subject-mini-card coming-soon" data-subject="English">
+              <div class="sub-badge soon">Coming Soon</div>
+              <div class="sub-icon"><i class="fa-solid fa-spell-check"></i></div>
+              <h3>English</h3>
+              <p>Grammar, Vocabulary, and Comprehension MCQs</p>
+              <button class="btn-mini-practice disabled" disabled>Coming Soon</button>
+            </div>
+            <div class="subject-mini-card coming-soon" data-subject="Tamil">
+              <div class="sub-badge soon">Coming Soon</div>
+              <div class="sub-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+              <h3>Tamil</h3>
+              <p>தமிழ் இலக்கணம் மற்றும் உரைநடை ஒரு மதிப்பெண் வினாக்கள்</p>
+              <button class="btn-mini-practice disabled" disabled>Coming Soon</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- 2. QUIZZES PAGE -->
+      <!-- ============================================== -->
+      <section id="pageQuizzes" class="page-view">
+        <div class="page-header">
+          <div class="page-title-wrap">
+            <h1><i class="fa-solid fa-layer-group"></i> Practice Quizzes</h1>
+            <p>Select a subject and quiz mode to begin practicing board exam objective questions.</p>
+          </div>
+        </div>
+
+        <!-- 5 Subjects Navigation Bar -->
+        <div class="subjects-nav-container">
+          <span class="filter-label">Select Subject:</span>
+          <div class="subjects-tabs" id="subjectButtonsGroup">
+            <button class="subject-btn active" data-subject="Mathematics" id="btnSubjMath">
+              <i class="fa-solid fa-calculator"></i>
+              <span>Mathematics</span>
+              <span class="active-dot"></span>
+            </button>
+            <button class="subject-btn" data-subject="Science" id="btnSubjScience">
+              <i class="fa-solid fa-flask"></i>
+              <span>Science</span>
+              <span class="badge-soon">Soon</span>
+            </button>
+            <button class="subject-btn" data-subject="Social" id="btnSubjSocial">
+              <i class="fa-solid fa-globe"></i>
+              <span>Social</span>
+              <span class="badge-soon">Soon</span>
+            </button>
+            <button class="subject-btn" data-subject="English" id="btnSubjEnglish">
+              <i class="fa-solid fa-spell-check"></i>
+              <span>English</span>
+              <span class="badge-soon">Soon</span>
+            </button>
+            <button class="subject-btn" data-subject="Tamil" id="btnSubjTamil">
+              <i class="fa-solid fa-pen-nib"></i>
+              <span>Tamil</span>
+              <span class="badge-soon">Soon</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Placeholder for Non-Math subjects -->
+        <div id="subjectComingSoonView" class="coming-soon-banner hidden">
+          <div class="coming-soon-content">
+            <div class="cs-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <h2 id="csSubjectTitle">Science Questions Coming Soon!</h2>
+            <p>We are currently completing the comprehensive Tamil Nadu State Board Class 10 Mathematics question bank. Questions for this subject will be added next!</p>
+            <button class="btn-primary" onclick="switchSubject('Mathematics')">
+              <i class="fa-solid fa-arrow-left"></i> Practice Mathematics Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Mathematics Content Container -->
+        <div id="mathQuizSection" class="math-quiz-container">
+          <!-- 3 Mode Buttons -->
+          <div class="quiz-modes-card">
+            <div class="modes-title">
+              <h3><i class="fa-solid fa-sliders"></i> Choose Mathematics Quiz Mode:</h3>
+              <p>Practice specific chapters, test all 8 chapters together, or pick your custom chapter combo.</p>
+            </div>
+            <div class="modes-btn-group">
+              <button class="mode-btn active" data-mode="chapterwise" id="btnModeChapterwise">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <div class="mode-btn-text">
+                  <span class="mode-name">Chapter-wise</span>
+                  <span class="mode-desc">Select 1 chapter & practice</span>
+                </div>
+              </button>
+
+              <button class="mode-btn" data-mode="allchapters" id="btnModeAllChapters">
+                <i class="fa-solid fa-cubes-stacked"></i>
+                <div class="mode-btn-text">
+                  <span class="mode-name">All Chapters</span>
+                  <span class="mode-desc">Comprehensive test (all 8 chapters)</span>
+                </div>
+              </button>
+
+              <button class="mode-btn" data-mode="selectedchapters" id="btnModeSelectedChapters">
+                <i class="fa-solid fa-list-check"></i>
+                <div class="mode-btn-text">
+                  <span class="mode-name">Selected Chapters</span>
+                  <span class="mode-desc">Custom multi-chapter selection</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- MODE 1: CHAPTER-WISE VIEW -->
+          <div id="viewChapterwise" class="mode-view active">
+            <div class="mode-header">
+              <h3><i class="fa-solid fa-list-ul"></i> Select a Chapter to Practice</h3>
+              <p>Each chapter displays the chapter number, name, and total questions with instant feedback and explanations.</p>
+            </div>
+            <div class="chapters-grid" id="chaptersGrid">
+              <!-- Dynamically rendered 8 chapters -->
+            </div>
+          </div>
+
+          <!-- MODE 2: ALL CHAPTERS VIEW -->
+          <div id="viewAllChapters" class="mode-view hidden">
+            <div class="all-chapters-card">
+              <div class="card-icon-big"><i class="fa-solid fa-award"></i></div>
+              <h2>Full Syllabus Mathematics Quiz</h2>
+              <p>This quiz draws questions from all 8 chapters of Class 10 Mathematics. Practice under exam-like conditions!</p>
+              
+              <div class="all-chapters-stats">
+                <div class="mini-stat">
+                  <span class="label">Total Chapters</span>
+                  <span class="val">8 Chapters</span>
+                </div>
+                <div class="mini-stat">
+                  <span class="label">Question Bank</span>
+                  <span class="val">125 Questions</span>
+                </div>
+                <div class="mini-stat">
+                  <span class="label">Standard Quiz Size</span>
+                  <span class="val">15 Questions (Mixed)</span>
+                </div>
+              </div>
+
+              <div class="quiz-length-selector">
+                <label>Select number of questions:</label>
+                <div class="radio-pill-group">
+                  <label class="radio-pill">
+                    <input type="radio" name="allChCount" value="10"> 10 Questions
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="allChCount" value="15" checked> 15 Questions
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="allChCount" value="25"> 25 Questions
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="allChCount" value="all"> All Questions
+                  </label>
+                </div>
+              </div>
+
+              <button class="btn-primary btn-large" id="btnStartAllChaptersQuiz">
+                <i class="fa-solid fa-play"></i> Start All Chapters Quiz
+              </button>
+            </div>
+          </div>
+
+          <!-- MODE 3: SELECTED CHAPTERS VIEW -->
+          <div id="viewSelectedChapters" class="mode-view hidden">
+            <div class="selection-card">
+              <div class="selection-card-header">
+                <div>
+                  <h3><i class="fa-solid fa-check-double"></i> Select Chapters to Include</h3>
+                  <p>Choose any combination of chapters to create a customized multi-chapter quiz.</p>
+                </div>
+                <div class="selection-tools">
+                  <button class="btn-secondary-sm" id="btnSelectAllChapters">Select All</button>
+                  <button class="btn-secondary-sm" id="btnClearSelectedChapters">Clear</button>
+                </div>
+              </div>
+
+              <div class="chapter-checkbox-list" id="chapterCheckboxList">
+                <!-- Checkboxes populated dynamically -->
+              </div>
+
+              <div class="selected-quiz-footer">
+                <div class="selection-count-indicator">
+                  <span id="selectedChaptersCountText">0 chapters selected</span>
+                </div>
+                <button class="btn-primary btn-large" id="btnStartSelectedChaptersQuiz" disabled>
+                  <i class="fa-solid fa-play"></i> Start Quiz with Selected Chapters
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- 3. RECORDS PAGE (CALENDAR + QUIZ REPORTS) -->
+      <!-- ============================================== -->
+      <section id="pageRecords" class="page-view">
+        <div class="page-header">
+          <div class="page-title-wrap">
+            <h1><i class="fa-solid fa-calendar-days"></i> Practice Records & History</h1>
+            <p>Click on any date in the calendar to view all quizzes taken on that day and inspect question-by-question reports.</p>
+          </div>
+        </div>
+
+        <div class="records-layout">
+          <!-- Left Column: Interactive Calendar -->
+          <div class="calendar-card">
+            <div class="calendar-header">
+              <button class="calendar-nav-btn" id="calPrevMonth" title="Previous Month">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <h2 id="calendarMonthYear">November 2026</h2>
+              <button class="calendar-nav-btn" id="calNextMonth" title="Next Month">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+
+            <!-- Days of week -->
+            <div class="calendar-weekdays">
+              <span>Sun</span>
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+            </div>
+
+            <!-- Calendar Days Grid -->
+            <div class="calendar-days" id="calendarDaysGrid">
+              <!-- Dynamically generated day cells -->
+            </div>
+
+            <div class="calendar-legend">
+              <div class="legend-item">
+                <span class="legend-dot active-dot"></span>
+                <span>Practiced Day</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot selected-dot"></span>
+                <span>Selected Date</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot today-dot"></span>
+                <span>Today</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Quizzes taken on selected date -->
+          <div class="selected-day-records-card">
+            <div class="day-records-header">
+              <div class="day-records-title">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <h3 id="selectedDateTitle">Quizzes on Today</h3>
+              </div>
+              <span class="day-count-badge" id="selectedDateCountBadge">0 Quizzes</span>
+            </div>
+
+            <div id="selectedDateQuizList" class="records-quiz-list">
+              <!-- Quizzes list or empty message -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- 4. PROFILE PAGE -->
+      <!-- ============================================== -->
+      <section id="pageProfile" class="page-view">
+        <div class="page-header">
+          <div class="page-title-wrap">
+            <h1><i class="fa-solid fa-id-card"></i> Student Profile</h1>
+            <p>Manage your account credentials, view lifetime statistics, and review learning performance.</p>
+          </div>
+        </div>
+
+        <div class="profile-layout">
+          <!-- Profile Card -->
+          <div class="profile-card">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar-large" id="profileAvatar">K</div>
+              <div class="profile-badge-role">Class 10 Student</div>
+            </div>
+
+            <h2 id="profileDisplayName">Karpagam Shan</h2>
+            <p class="profile-username" id="profileDisplayUsername">@karpagam</p>
+
+            <div class="profile-summary-pills">
+              <div class="summary-pill">
+                <i class="fa-solid fa-calendar"></i> Joined Nov 2026
+              </div>
+              <div class="summary-pill">
+                <i class="fa-solid fa-graduation-cap"></i> TN State Board
+              </div>
+            </div>
+
+            <div class="profile-stats-box">
+              <div class="p-stat">
+                <span class="p-val" id="profileTotalQuizzes">0</span>
+                <span class="p-lbl">Quizzes Taken</span>
+              </div>
+              <div class="p-stat">
+                <span class="p-val" id="profileTotalQuestions">0</span>
+                <span class="p-lbl">Questions Solved</span>
+              </div>
+              <div class="p-stat">
+                <span class="p-val" id="profileAvgScore">0%</span>
+                <span class="p-lbl">Avg Accuracy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Edit Profile Form -->
+          <div class="edit-profile-card">
+            <div class="card-header">
+              <h3><i class="fa-solid fa-user-pen"></i> Update Account Details</h3>
+            </div>
+            
+            <form id="editProfileForm" class="profile-form">
+              <div class="form-group">
+                <label for="editFullName"><i class="fa-solid fa-signature"></i> Full Name</label>
+                <input type="text" id="editFullName" placeholder="Enter your full name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="editUsername"><i class="fa-solid fa-at"></i> Username (Login ID)</label>
+                <input type="text" id="editUsername" disabled title="Username cannot be changed">
+                <small class="form-hint">Username is your permanent login identifier.</small>
+              </div>
+
+              <div class="form-group">
+                <label for="editPassword"><i class="fa-solid fa-lock"></i> New Password</label>
+                <div class="input-password-wrap">
+                  <input type="password" id="editPassword" placeholder="Leave blank to keep current password">
+                  <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('editPassword', this)">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="editPasswordConfirm"><i class="fa-solid fa-shield-halved"></i> Confirm New Password</label>
+                <input type="password" id="editPasswordConfirm" placeholder="Re-enter new password">
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary" id="btnSaveProfile">
+                  <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                </button>
+              </div>
+            </form>
+
+            <div class="profile-danger-zone">
+              <h4><i class="fa-solid fa-triangle-exclamation"></i> Session & Data</h4>
+              <p>Sign out of your account on this device.</p>
+              <button class="btn-danger-outline" id="btnProfileSignOut">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============================================== -->
+    <!-- ACTIVE QUIZ MODAL SCREEN -->
+    <!-- ============================================== -->
+    <div id="quizModal" class="quiz-screen-modal hidden">
+      <div class="quiz-modal-container">
+        
+        <!-- Quiz Top Header -->
+        <div class="quiz-top-bar">
+          <div class="quiz-info">
+            <span class="quiz-subject-tag"><i class="fa-solid fa-calculator"></i> Mathematics</span>
+            <span class="quiz-chapter-tag" id="activeQuizChapterTag">Chapter 1: Relations and Functions</span>
+          </div>
+          <button class="btn-close-quiz" id="btnExitQuiz" title="Exit Quiz">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Quiz Progress Bar -->
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar" id="quizProgressBar" style="width: 10%;"></div>
+        </div>
+
+        <div class="quiz-counter-row">
+          <span class="quiz-counter-text" id="quizQuestionCounter">Question 1 of 15</span>
+          <span class="quiz-mode-pill" id="quizActiveModePill">Chapter-wise</span>
+        </div>
+
+        <!-- Question Card -->
+        <div class="question-box">
+          <div class="question-header">
+            <span class="q-badge" id="questionNumberBadge">Q1</span>
+            <div class="q-chapter-name" id="qChapterNameDisplay">Chapter 1: Relations and Functions</div>
+          </div>
+          <div class="q-text" id="activeQuestionText">
+            If n(A × B) = 6 and A = {1, 3}, then n(B) is:
+          </div>
+          <!-- Diagram Container (Shown if question has a diagram) -->
+          <div class="q-diagram-container hidden" id="qDiagramContainer">
+            <div class="q-diagram-header">
+              <i class="fa-solid fa-bezier-curve"></i>
+              <span>Figure / Diagram for this Question:</span>
+            </div>
+            <div class="q-diagram-wrapper">
+              <img id="qDiagramImage" src="" alt="Question Diagram" class="q-diagram-img">
+            </div>
+          </div>
+        </div>
+
+        <!-- Options Container (A, B, C, D) -->
+        <div class="options-container" id="optionsContainer">
+          <!-- Dynamically populated 4 options -->
+        </div>
+
+        <!-- Quiz Footer Actions -->
+        <div class="quiz-modal-footer">
+          <div class="footer-left-status" id="quizFeedbackMessage">
+            <!-- Feedback message -->
+          </div>
+          <div class="footer-right-buttons">
+            <button class="btn-primary" id="btnSubmitAnswer" disabled>
+              <i class="fa-solid fa-check"></i> Submit Answer
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- QUIZ RESULT MODAL -->
+    <!-- ============================================== -->
+    <div id="quizResultModal" class="result-modal hidden">
+      <div class="result-modal-card">
+        <div class="result-celebration">
+          <div class="result-trophy-badge" id="resultTrophyBadge">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <h2 id="resultTitle">Quiz Completed!</h2>
+          <p id="resultSubtitle">Great job practicing Tamil Nadu Class 10 Mathematics!</p>
+        </div>
+
+        <!-- Score Ring / Box -->
+        <div class="result-score-card">
+          <div class="score-display">
+            <span class="score-big" id="resultScoreFraction">14/15</span>
+            <span class="score-percentage" id="resultPercentage">93%</span>
+          </div>
+          <div class="score-grade-pill" id="resultGradePill">Excellent Performance</div>
+        </div>
+
+        <!-- Quick Summary Details -->
+        <div class="result-meta-grid">
+          <div class="meta-item">
+            <span class="meta-lbl">Subject</span>
+            <span class="meta-val">Mathematics</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-lbl">Chapter(s)</span>
+            <span class="meta-val" id="resultChaptersSummary">Chapter 1: Relations and Functions</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-lbl">Correct Answers</span>
+            <span class="meta-val text-green" id="resultCorrectCount">14</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-lbl">Incorrect Answers</span>
+            <span class="meta-val text-red" id="resultWrongCount">1</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="result-actions">
+          <button class="btn-primary" id="btnResultViewReport">
+            <i class="fa-solid fa-list-check"></i> Review All Answers & Solutions
+          </button>
+          <button class="btn-secondary" id="btnResultRetake">
+            <i class="fa-solid fa-rotate-right"></i> Take Another Quiz
+          </button>
+          <button class="btn-outline" id="btnResultGoDashboard">
+            <i class="fa-solid fa-house"></i> Go to Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- DETAILED QUIZ REPORT MODAL (Used from Records / Result) -->
+    <!-- ============================================== -->
+    <div id="quizReportModal" class="report-modal hidden">
+      <div class="report-modal-container">
+        
+        <div class="report-header">
+          <div class="report-header-text">
+            <h2><i class="fa-solid fa-file-lines"></i> Detailed Quiz Report</h2>
+            <p id="reportHeaderMeta">Mathematics • Chapter 1: Relations and Functions • Nov 9, 2026</p>
+          </div>
+          <button class="btn-close-modal" id="btnCloseReportModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Summary Score Banner -->
+        <div class="report-summary-banner">
+          <div class="r-stat">
+            <span class="lbl">Score</span>
+            <span class="val" id="reportScoreVal">14 / 15</span>
+          </div>
+          <div class="r-stat">
+            <span class="lbl">Accuracy</span>
+            <span class="val text-indigo" id="reportAccuracyVal">93%</span>
+          </div>
+          <div class="r-stat">
+            <span class="lbl">Correct</span>
+            <span class="val text-green" id="reportCorrectVal">14</span>
+          </div>
+          <div class="r-stat">
+            <span class="lbl">Incorrect</span>
+            <span class="val text-red" id="reportWrongVal">1</span>
+          </div>
+        </div>
+
+        <!-- Questions Breakdown List -->
+        <div class="report-questions-list" id="reportQuestionsList">
+          <!-- Dynamically populated question report cards -->
+        </div>
+
+        <div class="report-footer">
+          <button class="btn-secondary" id="btnReportCloseBottom">Close Report</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- AUTH MODAL (SIGN IN / SIGN UP) -->
+    <!-- ============================================== -->
+    <div id="authModal" class="auth-modal hidden">
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="auth-brand-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h2>Class 10 MCQ Portal</h2>
+          <p>Sign in or create an account to track your daily practice and quiz records.</p>
+        </div>
+
+        <!-- Auth Tabs: Sign In / Sign Up -->
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" id="tabBtnSignIn" onclick="switchAuthTab('signin')">Sign In</button>
+          <button class="auth-tab-btn" id="tabBtnSignUp" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+
+        <!-- Error/Success Banner -->
+        <div id="authAlert" class="auth-alert hidden"></div>
+
+        <!-- SIGN IN FORM -->
+        <form id="signInForm" class="auth-form active">
+          <div class="form-group">
+            <label for="loginUsername"><i class="fa-solid fa-user"></i> Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter your username" required autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword"><i class="fa-solid fa-lock"></i> Password</label>
+            <div class="input-password-wrap">
+              <input type="password" id="loginPassword" placeholder="Enter password" required autocomplete="current-password">
+              <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('loginPassword', this)">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary btn-block">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+          </button>
+
+          <div class="demo-account-hint">
+            <span>Or quick sign in with demo student:</span>
+            <button type="button" class="btn-demo-quick" id="btnQuickDemo">
+              <i class="fa-solid fa-bolt"></i> Login as Karpagam
+            </button>
+          </div>
+        </form>
+
+        <!-- SIGN UP FORM -->
+        <form id="signUpForm" class="auth-form hidden">
+          <div class="form-group">
+            <label for="signupName"><i class="fa-solid fa-signature"></i> Full Name</label>
+            <input type="text" id="signupName" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="signupUsername"><i class="fa-solid fa-user-plus"></i> Choose Username</label>
+            <input type="text" id="signupUsername" placeholder="e.g. rahul_10th" required autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label for="signupPassword"><i class="fa-solid fa-lock"></i> Choose Password</label>
+            <div class="input-password-wrap">
+              <input type="password" id="signupPassword" placeholder="Minimum 4 characters" required autocomplete="new-password">
+              <button type="button" class="btn-toggle-pwd" onclick="togglePasswordVisibility('signupPassword', this)">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary btn-block">
+            <i class="fa-solid fa-user-check"></i> Create Account & Start Practice
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+  </div>
+
+  <!-- Data Script -->
+  <script src="data/maths_data.js"></script>
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
