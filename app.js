@@ -98,37 +98,21 @@ function initAuth() {
     saveUsers(users);
   }
 
-  // Check logged in user
+  // USER REQUIREMENT: Always land in signin portal on arrival/startup
   const savedUserJson = localStorage.getItem('class10_currentUser');
   if (savedUserJson) {
     try {
-      STATE.currentUser = JSON.parse(savedUserJson);
-      updateUserUI();
-
-      // Sync latest records from cloud server for this user
-      if (STATE.currentUser && STATE.currentUser.username) {
-        fetch(`/api/records?username=${encodeURIComponent(STATE.currentUser.username)}`)
-          .then(res => res.json())
-          .then(data => {
-            if (data.success && Array.isArray(data.records) && data.records.length > 0) {
-              localStorage.setItem(getUserRecordsKey(), JSON.stringify(data.records));
-              renderDashboardToday();
-              renderCalendar();
-              renderDayRecords(STATE.selectedCalendarDate);
-            }
-          })
-          .catch(() => {});
+      const u = JSON.parse(savedUserJson);
+      if (u && u.username && u.username !== 'student') {
+        const userInput = document.getElementById('loginUsername');
+        if (userInput) userInput.value = u.username;
       }
-    } catch (e) {
-      STATE.currentUser = { username: 'student', name: 'Class 10 Student', isGuest: true };
-      updateUserUI();
-    }
-  } else {
-    // Default active student session so attended quizzes are always saved immediately!
-    STATE.currentUser = { username: 'student', name: 'Class 10 Student', isGuest: true };
-    localStorage.setItem('class10_currentUser', JSON.stringify(STATE.currentUser));
-    updateUserUI();
+    } catch (e) {}
   }
+
+  // User must sign in or sign up before accessing the app
+  STATE.currentUser = null;
+  showAuthModal('signin');
 
   // Setup Form Handlers
   const signInForm = document.getElementById('signInForm');
